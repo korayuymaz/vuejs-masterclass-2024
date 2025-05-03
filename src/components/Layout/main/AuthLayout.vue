@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { usePageStore } from '@/stores/page'
-import { storeToRefs } from 'pinia'
-
 const { pageData } = storeToRefs(usePageStore())
 </script>
 
