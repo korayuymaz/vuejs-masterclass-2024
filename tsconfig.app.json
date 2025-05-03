@@ -7,7 +7,8 @@
     "typed-router.d.ts",
     "database/types.ts",
     "auto-imports.d.ts",
-    "vite-env.d.ts"
+    "vite-env.d.ts",
+    "components.d.ts"
   ],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {

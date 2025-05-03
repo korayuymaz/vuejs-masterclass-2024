@@ -2,19 +2,20 @@
 import { supabase } from '@/lib/supabaseClient'
 import type { Tables } from 'database/types'
 import type { ColumnDef } from '@tanstack/vue-table'
-import DataTable from '@/components/ui/data-table/DataTable.vue'
 import { RouterLink } from 'vue-router'
 
+usePageStore().pageData.title = 'Projects'
+
 const projects = ref<Tables<'projects'>[] | null>(null)
-;(async () => {
+const getProjects = async () => {
   const { data, error } = await supabase.from('projects').select()
 
   if (error) console.log(error)
 
   projects.value = data
+}
 
-  console.log('projects: ', projects.value)
-})()
+await getProjects()
 
 const columns: ColumnDef<Tables<'projects'>>[] = [
   {
