@@ -19,7 +19,9 @@ await getProject(slug)
   <Table v-if="project">
     <TableRow>
       <TableHead> Name </TableHead>
-      <TableCell> {{ project.name }} </TableCell>
+      <TableCell>
+        <AppInPlaceEditText v-model="project.name" />
+      </TableCell>
     </TableRow>
     <TableRow>
       <TableHead> Description </TableHead>
@@ -35,15 +37,9 @@ await getProject(slug)
       <TableHead> Collaborators </TableHead>
       <TableCell>
         <div class="flex">
-          <Avatar
-            class="-mr-4 border border-primary hover:scale-110 transition-transform"
-            v-for="collab in project.collaborators"
-            :key="collab"
-          >
-            <RouterLink
-              class="w-full h-full flex items-center justify-center"
-              to=""
-            >
+          <Avatar class="-mr-4 border border-primary hover:scale-110 transition-transform"
+            v-for="collab in project.collaborators" :key="collab">
+            <RouterLink class="w-full h-full flex items-center justify-center" to="">
               <AvatarImage src="" alt="" />
               <AvatarFallback> </AvatarFallback>
             </RouterLink>
@@ -53,10 +49,7 @@ await getProject(slug)
     </TableRow>
   </Table>
 
-  <section
-    v-if="project"
-    class="mt-10 flex flex-col md:flex-row gap-5 justify-between grow"
-  >
+  <section v-if="project" class="mt-10 flex flex-col md:flex-row gap-5 justify-between grow">
     <div class="flex-1">
       <h2>Tasks</h2>
       <div class="table-container">
