@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { supabase } from './lib/supabaseClient'
 
 const errorStore = useErrorStore()
 
