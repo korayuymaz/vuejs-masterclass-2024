@@ -9,13 +9,17 @@ export const useAuthStore = defineStore('auth-store', () => {
   const isTrackingAuthChanges = ref(false)
 
   const setProfile = async () => {
-    if(!user.value){
+    if (!user.value) {
       profile.value = null
       return
     }
 
-    if(!profile.value || profile.value.id !== user.value.id){
-      const {data} = await profileQuery(user.value.id)
+    if (!profile.value || profile.value.id !== user.value.id) {
+      const { data } = await profileQuery({
+        column: 'id',
+        value: user.value.id
+      })
+
       profile.value = data || null
     }
   }
