@@ -31,7 +31,7 @@ const collabs = project.value?.collaborators ? await getProfilesByIds(project.va
     <TableRow>
       <TableHead> Description </TableHead>
       <TableCell>
-        <AppInPlaceEditTextArea v-model="project.description" @commit="updateProject" />
+        <AppInPlaceEditTextarea v-model="project.description" @commit="updateProject" />
       </TableCell>
     </TableRow>
     <TableRow>
