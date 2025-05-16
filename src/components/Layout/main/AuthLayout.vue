@@ -1,9 +1,13 @@
 <script setup lang="ts">
 const { pageData } = storeToRefs(usePageStore())
+
+const taskSheetOpen = ref(false)
 </script>
 
 <template>
-  <Sidebar />
+  <Sidebar @taskClicked="taskSheetOpen = true" />
+  <AppNewTask v-model="taskSheetOpen" />
+
   <div class="flex flex-col lg:ml-52 ml-16 transition-[margin]">
     <TopNavbar />
 
@@ -11,7 +15,7 @@ const { pageData } = storeToRefs(usePageStore())
       <div class="flex items-center">
         <h1 class="text-lg font-semibold md:text-2xl">{{ pageData.title }}</h1>
       </div>
-      <slot></slot>
+      <slot />
     </main>
   </div>
 </template>
