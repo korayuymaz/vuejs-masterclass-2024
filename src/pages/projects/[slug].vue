@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 const { slug } = useRoute('/projects/[slug]').params
 
 const projectsLoader = useProjectsStore()
@@ -13,6 +14,10 @@ watch(
 )
 
 await getProject(slug)
+
+const { getProfilesByIds } = useCollabs()
+
+const collabs = project.value?.collaborators ? await getProfilesByIds(project.value?.collaborators) : []
 </script>
 
 <template>
@@ -39,10 +44,11 @@ await getProject(slug)
       <TableHead> Collaborators </TableHead>
       <TableCell>
         <div class="flex">
-          <Avatar class="-mr-4 border border-primary hover:scale-110 transition-transform"
-            v-for="collab in project.collaborators" :key="collab">
-            <RouterLink class="w-full h-full flex items-center justify-center" to="">
-              <AvatarImage src="" alt="" />
+          <Avatar class="-mr-4 border border-primary hover:scale-110 transition-transform" v-for="collab in collabs"
+            :key="collab.id">
+            <RouterLink class="w-full h-full flex items-center justify-center"
+              :to="{ name: '/users/[username]', params: { username: collab.username } }">
+              <AvatarImage :src="collab.avatar_url || ''" alt="" />
               <AvatarFallback> </AvatarFallback>
             </RouterLink>
           </Avatar>
@@ -65,9 +71,14 @@ await getProject(slug)
           </TableHeader>
           <TableBody>
             <TableRow v-for="task in project.tasks" :key="task.id">
-              <TableCell> Lorem ipsum dolor sit amet. </TableCell>
-              <TableCell> In progress </TableCell>
-              <TableCell> 22/08/2024 </TableCell>
+              <TableCell class="p-0">
+                <RouterLink class="text-left block hover:bg-muted p-4"
+                  :to="{ name: '/tasks/[id]', params: { id: task.id } }">{{ task.name }}</RouterLink>
+              </TableCell>
+              <TableCell>
+                <AppInPlaceEditStatus readonly :model-value="task.status" />
+              </TableCell>
+              <TableCell> {{ task.due_date }}</TableCell>
             </TableRow>
           </TableBody>
         </Table>
