@@ -42,7 +42,11 @@ const triggerDelete = async () => {
       <TableRow>
         <TableHead> Description </TableHead>
         <TableCell>
-          <AppInPlaceEditTextarea class="h-20" v-model="task.description" @commit="updateTask" />
+          <AppInPlaceEditTextarea
+            class="h-20"
+            v-model="task.description"
+            @commit="updateTask"
+          />
         </TableCell>
       </TableRow>
       <TableRow>
@@ -60,12 +64,18 @@ const triggerDelete = async () => {
         <TableCell>
           <TableCell>
             <div class="flex">
-              <Avatar class="-mr-4 border border-primary hover:scale-110 transition-transform" v-for="collab in collabs"
-                :key="collab.id">
-                <RouterLink class="w-full h-full flex items-center justify-center" :to="{
-                  name: '/users/[username]',
-                  params: { username: collab.username }
-                }">
+              <Avatar
+                class="-mr-4 border border-primary hover:scale-110 transition-transform"
+                v-for="collab in collabs"
+                :key="collab.id"
+              >
+                <RouterLink
+                  class="w-full h-full flex items-center justify-center"
+                  :to="{
+                    name: '/users/[username]',
+                    params: { username: collab.username }
+                  }"
+                >
                   <AvatarImage :src="collab.avatar_url || ''" alt="" />
                   <AvatarFallback> </AvatarFallback>
                 </RouterLink>
@@ -78,9 +88,13 @@ const triggerDelete = async () => {
         <TableHead class="align-top pt-4"> Comments </TableHead>
         <TableCell>
           Comments cards goes in here..
-          <div class="flex flex-col justify-between p-3 bg-muted my-2 rounded-md">
-            <textarea placeholder="Add your comment.."
-              class="w-full max-w-full overflow-y-auto prose-sm prose border rounded dark:prose-invert hover:border-muted bg-background border-muted p-3">
+          <div
+            class="flex flex-col justify-between p-3 bg-muted my-2 rounded-md"
+          >
+            <textarea
+              placeholder="Add your comment.."
+              class="w-full max-w-full overflow-y-auto prose-sm prose border rounded dark:prose-invert hover:border-muted bg-background border-muted p-3"
+            >
             </textarea>
             <div class="flex justify-between mt-3">
               <Button> Comment </Button>
@@ -100,9 +114,17 @@ const triggerDelete = async () => {
       </TableRow>
     </Table>
 
-    <Button @click="triggerDelete" class="self-end mt-3 w-full max-w-40" variant="destructive">
+    <Button
+      @click="triggerDelete"
+      class="self-end mt-3 w-full max-w-40"
+      variant="destructive"
+    >
       <Transition name="scale" mode="out-in">
-        <iconify-icon v-if="deleteLoading" icon="lucide:loader-circle" class="mr-1 animate-spin"></iconify-icon>
+        <iconify-icon
+          v-if="deleteLoading"
+          icon="lucide:loader-circle"
+          class="mr-1 animate-spin"
+        ></iconify-icon>
         <iconify-icon v-else icon="lucide:trash-2" class="mr-1"></iconify-icon>
       </Transition>
       Delete Task
@@ -110,7 +132,7 @@ const triggerDelete = async () => {
   </div>
 </template>
 
-<style>
+<style scoped>
 th {
   @apply w-[100px];
 }
